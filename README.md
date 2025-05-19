@@ -40,7 +40,7 @@ Para levantar el servidor desde cero se utiliza **Docker**. No es necesario tene
 
 A continuación se muestra una representación general del modelo de base de datos utilizado en la aplicación:
 
-**(Aquí insertar el diagrama de entidades-relaciones: productos, categorías, compras, clientes, usuarios admins, etc.)**
+![](er_database.png)
 
 ---
 
@@ -79,7 +79,7 @@ A continuación se muestra una representación general del modelo de base de dat
 
 El envío de correos (por ejemplo, para notificación de primera compra o reportes diarios) se verifica usando [Mailtrap](https://mailtrap.io). Se ha configurado como servidor SMTP por defecto en el entorno de desarrollo.
 
-**(Aquí insertar una captura del inbox de Mailtrap con el correo recibido)**
+![](inbox_mailer.png)
 
 ---
 
@@ -101,7 +101,7 @@ El envío de correos (por ejemplo, para notificación de primera compra o report
 
 Se ha incluido un archivo de colección Postman con todos los endpoints disponibles y ejemplos de uso.
 
-**(Adjuntar aquí o referenciar el archivo `postman_collection.json`)**
+[Api-Rails-Ecommerce.postman_collection](Api-Rails-Ecommerce.postman_collection)
 
 ---
 
@@ -111,7 +111,7 @@ Se ha incluido un archivo de colección Postman con todos los endpoints disponib
 
 * **Historial de cambios**: se implementó seguimiento de cambios con la gema `paper_trail` en modelos como `Product`, permitiendo consultar versiones anteriores.
 
-* **Tareas programadas con Sidekiq Scheduler**: se ejecuta un job diario (`DailyPurchaseReportJob`) que envía un resumen de compras a los administradores.
+* **Tareas programadas con Sidekiq Scheduler**: se ejecuta un job diario (`DailyPurchaseReportJob`) que envía un resumen de compras a los administradores (Está programado todos los días a las 7).
 
 ---
 
