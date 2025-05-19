@@ -1,0 +1,12 @@
+:concurrency: 5
+
+:scheduler:
+  :schedule:
+    daily_purchase_report_job:
+      cron: "0 7 * * *"
+      class: "DailyPurchaseReportJob"
+      queue: default
+
+:queues:
+  - default
+  - mailers

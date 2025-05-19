@@ -1,0 +1,28 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db  # <- Agregado para usar el contenedor de Postgres
+  username: postgres
+  password: postgres
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: rails_ecommerce_development
+  host: db
+  username: postgres
+  password: postgres
+
+test:
+  <<: *default
+  database: rails_ecommerce_test
+  host: db
+  username: postgres
+  password: postgres
+
+
+production:
+  <<: *default
+  database: app_production
+  username: app
+  password: <%= ENV["APP_DATABASE_PASSWORD"] %>

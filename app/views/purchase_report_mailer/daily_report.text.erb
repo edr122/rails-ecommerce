@@ -1,0 +1,17 @@
+Hola <%= @admin.email %>,
+
+Este es el reporte de compras del dia anterior <%= @report_date.strftime('%d/%m/%Y') %>:
+
+<% if @report_data.any? %>
+<% @report_data.each do |item| %>
+- Producto: <%= item[:product_name] %>
+  Cantidad total vendida: <%= item[:total_quantity] %>
+  Monto total: $<%= '%.2f' % item[:total_amount] %>
+
+<% end %>
+<% else %>
+No se registraron compras en el dia anterior.
+<% end %>
+
+Gracias,
+Tu ecommerce

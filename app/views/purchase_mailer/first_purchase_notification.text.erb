@@ -1,0 +1,11 @@
+Hola <%= @product.admin_user.email %>,
+
+El producto "<%= @product.name %>" ha sido comprado por primera vez.
+
+Cliente: <%= @customer.name %>
+Cantidad: <%= @purchase.quantity %>
+Total: S/. <%= @purchase.total_amount %>
+Fecha: <%= @purchase.purchased_at.strftime("%d/%m/%Y %H:%M") %>
+
+Saludos,
+Tu tienda

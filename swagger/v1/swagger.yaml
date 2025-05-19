@@ -1,0 +1,165 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- bearerAuth: []
+paths:
+  "/api/v1/login":
+    post:
+      summary: Authenticate admin and return JWT token
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: token returned
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/api/v1/stats/most_purchased_products":
+    get:
+      summary: Returns most purchased products by category
+      tags:
+      - Statistics
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: products returned
+        '401':
+          description: unauthorized
+  "/api/v1/stats/purchase_volume":
+    get:
+      summary: Get purchase volume with granularity
+      tags:
+      - Statistics
+      parameters:
+      - name: from_date
+        in: query
+        format: date
+        required: true
+        schema:
+          type: string
+      - name: to_date
+        in: query
+        format: date
+        required: true
+        schema:
+          type: string
+      - name: granularity
+        in: query
+        enum:
+        - hour
+        - day
+        - week
+        - year
+        required: true
+        schema:
+          type: string
+        description: ":\n * `hour` \n * `day` \n * `week` \n * `year` \n "
+      - name: category_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: customer_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: admin_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: success
+        '400':
+          description: bad request (missing or invalid params)
+        '401':
+          description: unauthorized
+  "/api/v1/purchases/filter":
+    get:
+      summary: Retrieve filtered purchases
+      tags:
+      - Purchases
+      parameters:
+      - name: from_date
+        in: query
+        format: date
+        required: false
+        description: Start date (YYYY-MM-DD)
+        schema:
+          type: string
+      - name: to_date
+        in: query
+        format: date
+        required: false
+        description: End date (YYYY-MM-DD)
+        schema:
+          type: string
+      - name: category_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: customer_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: admin_id
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        description: Page number for pagination
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: Items per page
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: filtered purchases found
+        '401':
+          description: unauthorized
+  "/api/v1/stats/top_earning_products":
+    get:
+      summary: Returns top 3 earning products per category
+      tags:
+      - Statistics
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: top products returned
+        '401':
+          description: unauthorized
