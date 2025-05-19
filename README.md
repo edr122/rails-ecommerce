@@ -60,7 +60,7 @@ A continuación se muestra una representación general del modelo de base de dat
    docker-compose up
    ```
 
-3. Crea y prepara la base de datos:
+3. (Abre una nueva terminal) Crea y prepara la base de datos:
 
    ```bash
    docker-compose run --rm web rails db:create db:migrate db:seed
